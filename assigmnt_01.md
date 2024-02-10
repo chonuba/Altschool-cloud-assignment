@@ -4,6 +4,7 @@ Your login name: altschool i.e., home directory /home/altschool. The home direct
 
 ## Preamble....
 Creating a user with the requested subdirectories in home directory
+
 1. Creating altschool user with home directory, add to sudo group for elevated previllege, assign preferred shell (bash)...
 ```bash
 sudo userdd -m -G sudo -s /bin/bash altschool
@@ -23,19 +24,19 @@ mkdir -v code tests personal misc
 ![creating user and subdirectories](./screenshots/create_user_and_dirs.png)
 
 ## Solutions....
-a. Change directory to the tests directory using absolute pathname
+### a. Change directory to the tests directory using absolute pathname
 ```bash
     cd /home/altschool/tests
 ```
 ![absolute path](./screenshots/cd_absolute-path.png)
 
-b. Change directory to the tests directory using relative pathname. 
+#### b. Change directory to the tests directory using relative pathname. 
     ```bash
     cd ../tests
     ```
 ![relative path](./screenshots/cd_relative_path.png)
 
-c. Use echo command to create a file named fileA with text content ‘Hello A’ in the misc directory
+#### c. Use echo command to create a file named fileA with text content ‘Hello A’ in the misc directory
 ```bash 
 echo Hello A > ./misc/fileA
 ```
@@ -48,31 +49,31 @@ head -c 1024 /dev/urandom >>./misc/fileB
 ```
 ![empty file, dummy content](./screenshots/empty-file-dumy-content.png)
 
-e. Copy contents of FileA into fileC
+#### e. Copy contents of FileA into fileC
 ```bash
 cp ./misc/FileA ./misc/fileC
 ```
 ![copy file](./screenshots/copy_file.png)
 
-f. Move contents of fileB into fileD
+#### f. Move contents of fileB into fileD
 ```bash
 mv misc/fileB misc/fileD
 ```
 ![moving file](./screenshots/move_or_rename.png)
 
-g. Create a tar archive called misc.tar for the contents of misc directory 
+#### g. Create a tar archive called misc.tar for the contents of misc directory 
 ```bash
 tar -cvf misc.tar ./misc
 ```
 ![tar archive](./screenshots/tar_archiving.png)
 
-h. Compress the tar archive to create a misc.tar.gz file 
+#### h. Compress the tar archive to create a misc.tar.gz file 
 ```bash
 gzip -kv misc.tar
 ```  
 ![gzip compression](./screenshots/gzip_compression.png)
 
-i. Create a user and force the user to change his/her password upon login
+####  i. Create a user and force the user to change his/her password upon login
 ```bash
 sudo useradd -m altschool2
 ```
@@ -86,7 +87,7 @@ sudo chage -d 0 altschool2
 ```
 ![new user with expiring password](./screenshots/expiring_user_password.png)
 
-j. Lock a users password
+#### j. Lock a users password
 ```bash
 sudo useradd -m altschool3
 ```
@@ -96,13 +97,13 @@ sudo passwd -l  altschool3
 ```
 ![Locked password](./screenshots/locking_user_password.png)
 
-k. Create a user with no login shell
+#### k. Create a user with no login shell
 ```bash
 sudo useradd -m -s /sbin/nologin altschoolnoshell` 
 ```
 ![crreating user with no login shell](./screenshots/no_shell_user.png)
 
-l. Disable password based authentication for ssh
+#### l. Disable password based authentication for ssh
 
 ```bash
 vi /etc/ssh/sshd_config
@@ -112,7 +113,8 @@ Edit the line with PasswordAuthentication from yes to no, and edit the line useP
 then saVe and run...
     `service sshd restart`
 ![diabaled ssh password login](./screenshots/disabled_ssh_password_login.png)
-m. Disable root login for ssh
+
+#### m. Disable root login for ssh
 ```bash
 vi /etc/ssh/sshd_config
 ```
