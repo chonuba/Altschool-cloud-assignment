@@ -10,7 +10,7 @@ if [ $# -eq 2 ] && [ $1=="-d" ] && [ -d $2 ]; then
     sudo du -a -h $2 | sort -rh 
 fi
 
-if [ $# -eq 2 ] && [ $1=="-n" ] && [ $2 -gt 0 ]; then
+if [ $# -eq 3 ] && [ $1=="-n" ] && [ $2 -gt 0 ]; then
     sudo du -h $3 | sort -rh | head -$2
 elif [ $#!="-n" ] && [ $#!="-d" ]; then
     sudo du -h $2 | sort -rh | head -8
