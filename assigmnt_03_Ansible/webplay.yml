@@ -1,0 +1,51 @@
+---
+- name: Deploying Project with Apache
+  hosts: all
+  become: yes
+  
+  tasks:
+  - name: Install Apache2 and PHP dependencies on Ubuntu
+    apt:
+      name: 
+      - apache2
+      - libapache2-mod-php
+      state: latest
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: Update Apt Repo Index on Ubuntu
+    apt:
+      update_cache: yes
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: Install Apache2 and PHP on RedHat/CentOS
+    yum:
+      name: 
+      - httpd
+      - php
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == 'CentOS'
+
+  - name: Start apache, if not started
+    service:
+      name: httpd
+      state: started
+      enbaled: yes
+    when: ansible_distribution in ["RedHat", "CentOS"]
+
+  - name: Firewall permit on port 80
+    firewalld:
+      port: 80/tcp
+      state: enabled
+      immediate: true
+      permanent: true
+    when: ansible_distribution in ["Redhat", "CentOS"]
+
+  - name: Copy project files to document root
+    copy:
+      src: /vagrant_data/altschool/projects/tic_tac_toe/
+      dest: /var/wwww/htmm/
+      owner: vagrant
+      group: vagrant
+      mode: 0644
+      backup: yes
